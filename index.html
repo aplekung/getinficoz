@@ -4,30 +4,299 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFICOZ</title>
-    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1352607355388432436/1353713213816049724/inficoz.png?ex=67e2a72c&is=67e155ac&hm=24381407b59c9cd0b673409ee81cf274be9a11d8ca2f3aa6ab287f6b46bce463&=&format=webp&quality=lossless">
+    <link rel="icon" type="image/png" href="/img/inficoz.png">
     <style>
-        /* Global Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-body {
-    background-color: #0a0a0a;
-    color: #ffffff;
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            z-index: -1000;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.7); /* Semi-transparent overlay */
+            z-index: -999;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #b3b3b3;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+        
+        .download-btn {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .download-icon {
+            margin-left: 8px;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero-logo {
+            margin-bottom: 40px;
+            height: 80px;
+            width: auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            max-width: 600px;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .primary-btn {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .primary-btn:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #2a2a2a;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .btn-icon {
+            margin-left: 8px;
+            font-size: 16px;
+        }
+        
+        .image-showcase {
+            max-width: 800px;
+            margin: 0 auto 100px auto;
+            overflow: hidden;
+        }
+        
+        .image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px; /* Add perspective for 3D effect */
+        }
+        
+        .glowing-image {
+            position: relative;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            overflow: hidden;
+            transform-style: preserve-3d; /* Enable 3D transformations */
+            transition: transform 0.1s ease-out; /* Smooth transition for mouse movement */
+        }
+        
+        .glowing-image img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .glow-effect {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 12px;
+            z-index: 0;
+            box-shadow: none; /* No glow by default */
+            transition: box-shadow 0.3s ease, border 0.3s ease, filter 0.3s ease;
+            border: none; /* No border by default */
+            filter: blur(0); /* No blur by default */
+            opacity: 0; /* Hidden by default */
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 
+                    0 0 10px 2px rgba(66, 133, 244, 0.7),
+                    0 0 20px 4px rgba(66, 133, 244, 0.5),
+                    0 0 30px 6px rgba(66, 133, 244, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 15px 3px rgba(66, 133, 244, 0.8),
+                    0 0 30px 6px rgba(66, 133, 244, 0.6),
+                    0 0 45px 9px rgba(66, 133, 244, 0.4);
+            }
+            100% {
+                box-shadow: 
+                    0 0 10px 2px rgba(66, 133, 244, 0.7),
+                    0 0 20px 4px rgba(66, 133, 244, 0.5),
+                    0 0 30px 6px rgba(66, 133, 244, 0.3);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .buttons {
+                flex-direction: column;
+            }
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-btn {
+            background-color: #2a2a2a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-btn:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .social-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #ffffff;
+        }
+        
+        .youtube-btn svg path {
+            stroke: #ff0000;
+        }
+        
+        .discord-btn svg path {
+            stroke: #7289da;
+        }
+        /* Header */
 header {
     padding: 20px 0;
     display: flex;
@@ -309,27 +578,6 @@ nav ul li a:hover {
     transform: scale(1.1);
     box-shadow: 0 0 30px rgba(75, 75, 75, 0.8);
 }
-
-
-@keyframes pulse {
-    50% {
-        box-shadow: 0 0 40px 10px rgba(66, 133, 244, 1);
-    }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .buttons {
-        flex-direction: column;
-    }
-    .hero h1 {
-        font-size: 36px;
-    }
-    .hero p {
-        font-size: 16px;
-    }
-}
-
     </style>
 </head>
 <body>
@@ -342,7 +590,7 @@ nav ul li a:hover {
     
     <main>
         <section class="hero container">
-            <img class="hero-logo" src="https://media.discordapp.net/attachments/1352607355388432436/1353713213816049724/inficoz.png?ex=67e2a72c&is=67e155ac&hm=24381407b59c9cd0b673409ee81cf274be9a11d8ca2f3aa6ab287f6b46bce463&=&format=webp&quality=lossless" alt="Logo" />
+            <img class="hero-logo" src="/img/inficoz.png" alt="Logo" />
             
             <h1>INFICOZ</h1>
             
@@ -361,7 +609,7 @@ nav ul li a:hover {
                     <img src="img/yt.png" alt="YouTube">
                     <div>YouTube</div>
                 </a>
-            </div>            
+            </div>
         </div>
         </section>
         
@@ -369,7 +617,7 @@ nav ul li a:hover {
             <div class="image-container">
                 <div class="glowing-image">
                     <div class="glow-effect"></div>
-                    <img src="https://media.discordapp.net/attachments/1352607355388432436/1353712474972622940/image.png?ex=67e2a67c&is=67e154fc&hm=eb54190cf9b1271953468b765afad501aae0c2dc15392c12cdaeaf8906df6ae9&=&format=webp&quality=lossless" alt="Featured content" />
+                    <img src="img/image.png" alt="Featured content" />
                 </div>
             </div>
         </div>
@@ -386,11 +634,7 @@ nav ul li a:hover {
             });
             
             // Create multiple placeholder images for demo
-            const images = [
-                'https://media.discordapp.net/attachments/1352607355388432436/1353712474972622940/image.png?ex=67e2a67c&is=67e154fc&hm=eb54190cf9b1271953468b765afad501aae0c2dc15392c12cdaeaf8906df6ae9&=&format=webp&quality=lossless',
-                'https://media.discordapp.net/attachments/1352607355388432436/1353712474972622940/image.png?ex=67e2a67c&is=67e154fc&hm=eb54190cf9b1271953468b765afad501aae0c2dc15392c12cdaeaf8906df6ae9&=&format=webp&quality=lossless',
-                'https://media.discordapp.net/attachments/1352607355388432436/1353712474972622940/image.png?ex=67e2a67c&is=67e154fc&hm=eb54190cf9b1271953468b765afad501aae0c2dc15392c12cdaeaf8906df6ae9&=&format=webp&quality=lossless'
-            ];
+
             
             let currentImageIndex = 0;
             const imageElement = document.querySelector('.glowing-image img');
